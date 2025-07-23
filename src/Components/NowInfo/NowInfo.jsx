@@ -1,27 +1,8 @@
 import { CITY_DICT_RU } from "../../cons";
+import { getCurrentWeekdayAndTime } from "../../utils";
 
 function NowInfo(props) {
   const imageSrc = props.imageSrc.replace("64x64", "128x128");
-
-  const getCurrentWeekdayAndTime = (timezone, language) => {
-    const date = new Date();
-
-    const weekday = new Intl.DateTimeFormat(language, {
-      weekday: "long",
-      timeZone: timezone,
-    });
-    const time = new Intl.DateTimeFormat(language, {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-      timeZone: timezone,
-    });
-
-    return {
-      weekday: weekday.format(date),
-      time: time.format(date),
-    };
-  };
 
   const getCityName = (language, location) => {
     if (language == "ru") {
@@ -31,6 +12,7 @@ function NowInfo(props) {
   };
 
   const { weekday, time } = getCurrentWeekdayAndTime(props.tzId, props.locationCode);
+
   return (
     <>
       <div className={`absolute inset-0 max-h-full grid grid-cols-3 grid-rows-[2fr_2fr_1fr] p-3 lg:p-5 sm:flex sm:flex-col sm:gap-12 fade-in ${props.className}`}>

@@ -2,7 +2,7 @@ import WeekDays from "./WeekDays/WeekDays";
 import DayHighlights from "./DayHighlights/DayHighlights";
 import { useEffect, useState } from "react";
 
-function WeekTab({ className = "", loadingStage }) {
+function WeekTab({ className = "", loadingStage, weatherData }) {
   const [weekDay, setWeekDay] = useState(0);
   const [isLoading, setIsLoading] = useState(loadingStage);
   const tabStage = {};
@@ -16,17 +16,14 @@ function WeekTab({ className = "", loadingStage }) {
     { hourString: "00:00", temp: 24, conditionIcon: "//cdn.weatherapi.com/weather/64x64/night/113.png" },
   ];
 
+  console.log("WeekTab weatherData", weatherData);
+
   useEffect(() => {
     setIsLoading(loadingStage);
   }, [loadingStage]);
 
-  useEffect(() => {
-    console.log("WeekTab", isLoading);
-  }, [isLoading]);
-
   const choosedWeekDay = (weekDay) => {
-    console.log("choosedWeekDaychoosedWeekDay");
-
+    setWeekDay(weekDay);
     setIsLoading("loading");
     setTimeout(() => {
       setIsLoading("fading");
@@ -34,8 +31,6 @@ function WeekTab({ className = "", loadingStage }) {
   };
 
   const func = () => {
-    console.log("END");
-
     if (isLoading != "complete") {
       setIsLoading("complete");
     }
@@ -46,7 +41,7 @@ function WeekTab({ className = "", loadingStage }) {
       <div className={`h-fit sm:h-full ${className}`}>
         <div className="h-full flex flex-col sm:grid sm:grid-rows-[auto_1fr] lg:grid-rows-[auto_3fr] gap-5 sm:gap-y-4">
           <WeekDays loadingStage={loadingStage} onWeekDayChoose={choosedWeekDay}></WeekDays>
-          <DayHighlights onAnimationEnd={func} loadingStage={isLoading}></DayHighlights>
+          <DayHighlights onAnimationEnd={func} weatherData={weatherData} dayNum={weekDay} loadingStage={isLoading}></DayHighlights>
         </div>
       </div>
     </>

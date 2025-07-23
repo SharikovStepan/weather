@@ -43,7 +43,7 @@ export const CITY_DICT_RU = {
 };
 
 export const TABS = [
-  { id: "today", text: "Сегодня" },
+  { id: "today", text: "Сейчас" },
   { id: "tomorrow", text: "Завтра" },
   { id: "week", text: "Неделя" },
 ];

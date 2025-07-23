@@ -2,7 +2,8 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
+ .{
+	--color-asdasd:#b0022d;
   --color-prm-bg: #d6d6d6;
   --color-scn-bg: #bbb;
   --color-prm: #858585;
@@ -44,6 +45,10 @@
   }
   .highlight-value {
     @apply text-4xl sm:text-3xl
+  }
+
+  .input-border{
+	@apply outline-none pl-1 rounded-md focus:border-2 focus:border-scn-dark dark:focus:border-scn
   }
   /* .active-weekday{
 	@apply bg-pr

@@ -22,6 +22,7 @@ function App() {
   });
 
   const [currentLanguage, setCurrentLanguage] = useState("ru");
+
   const [currentWeather, setCurrentWeather] = useState({});
 
   const fetchGet = async (URL) => {
@@ -45,11 +46,11 @@ function App() {
     try {
       const startTime = Date.now();
       const [weatherData, conditions] = await Promise.all([fetchGet(URL_FORECAST), fetchGet(URL_CONDITIONS)]);
-      console.log("conditions", conditions);
+      // console.log("conditions", conditions);
       console.log("weatherData", weatherData);
 
-      const { current, location } = weatherData;
-      const { condition, is_day: isDay, temp_c } = current;
+      const { current, location, forecast } = weatherData;
+      const { condition, is_day: isDay, temp_c, vis_km: visibility, wind_kph: windSpeed, uv, humidity } = current;
       const { name, tz_id: tzId } = location;
 
       const currentCondition = conditions.find((cond) => cond.code == condition.code);
@@ -67,8 +68,14 @@ function App() {
         locationName: name,
         locationCode: currentLanguageCondition["lang_iso"],
         temp: Math.floor(temp_c),
+        visibility,
+        windSpeed,
+        humidity,
+        uv,
         tzId,
         conditionText,
+        forecast: forecast.forecastday,
+        allConditions: conditions,
       });
       setLoadingStage("fading");
     } catch (error) {
@@ -90,6 +97,10 @@ function App() {
     getWeather();
   }, []);
 
+  useEffect(() => {
+    console.log("currentWeather", currentWeather);
+  }, [currentWeather]);
+
   const switchTab = (tab) => {
     if (tabStage.stage == "idle") {
       setTabStage({
@@ -100,10 +111,6 @@ function App() {
       localStorage.setItem("currentTab", tab);
     }
   };
-
-  //   useEffect(() => {
-  //     console.log("tabStage", tabStage);
-  //   }, [tabStage]);
 
   const tabFadding = () => {
     if (tabStage.stage == "fade-out") {
@@ -124,12 +131,11 @@ function App() {
   const renderTab = (tabId) => {
     switch (tabId) {
       case "today":
-        return <DayTab loadingStage={loadingStage} />;
+        return <DayTab loadingStage={loadingStage} weatherData={currentWeather} dayNum={0} />;
       case "tomorrow":
-        return <DayTab loadingStage={loadingStage} />;
+        return <DayTab loadingStage={loadingStage} weatherData={currentWeather} dayNum={1} />;
       case "week":
-        console.log("renderingWEEK", loadingStage);
-        return <WeekTab loadingStage={loadingStage} />;
+        return <WeekTab loadingStage={loadingStage} weatherData={currentWeather} />;
       default:
         return <div>Неизвестно</div>;
     }
@@ -153,15 +159,14 @@ function App() {
           )}
         </div>
         <div className="sm:relative flex flex-col gap-5 sm:gap-3">
-
-          <div className=" sm:relative">
-            <div className="w-full h-full sm:w-1/2 rounded-md bg-scn-bg-dark flex items-center">
+          <div className="sm:relative">
+            <div className="w-full sm:w-1/2 rounded-md dark:bg-scn-bg-dark bg-scn-bg flex items-center">
               <div className="p-1">
-                <svg className="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 50 50" width="50px" height="50px">
+                <svg className="w-8 h-8 sm:w-5 sm:h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 50 50" width="50px" height="50px">
                   <path d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z" />
                 </svg>
               </div>
-              <input id='city' className="flex-1 h-full focus:border focus:border-black bg-transparent" type="text" />
+              <input id="city" className="flex-1 input-border self-stretch" type="text" />
             </div>
             <DarkModeSwitcher isDark={isDark} onChange={darkSwitch} />
           </div>
