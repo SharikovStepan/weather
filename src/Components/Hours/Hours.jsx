@@ -33,7 +33,6 @@ function Hours({ loadingStage, weatherData, dayNum }) {
       });
     }
   });
-  console.log("hoursArrhoursArr", hoursArr);
 
   return (
     <>

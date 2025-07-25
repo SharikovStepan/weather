@@ -51,3 +51,5 @@ export const TABS = [
 export const CITIES = ["Moscow", "London", "beijing", "dubai", "Berlin", "New York", "Tokyo", "Saint Petersburg"];
 
 export const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+
+export const WEEKDAYS = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];

@@ -1,18 +1,46 @@
 import { useState } from "react";
 import WeekDaysSkeleton from "./WeekDaysSkeleton";
+import { WEEKDAYS } from "../../cons";
 
 function WeekDays(props) {
   const [weekDay, setWeekDay] = useState(0);
 
-  const weekDaysArr = [
-    { hourString: "00:00", temp: 20, conditionIcon: "//cdn.weatherapi.com/weather/64x64/day/113.png" },
-    { hourString: "00:00", temp: 24, conditionIcon: "//cdn.weatherapi.com/weather/64x64/night/116.png" },
-    { hourString: "00:00", temp: 24, conditionIcon: "//cdn.weatherapi.com/weather/64x64/night/113.png" },
-    { hourString: "00:00", temp: 24, conditionIcon: "//cdn.weatherapi.com/weather/64x64/night/113.png" },
-    { hourString: "00:00", temp: 11, conditionIcon: "//cdn.weatherapi.com/weather/64x64/night/113.png" },
-    { hourString: "00:00", temp: 24, conditionIcon: "//cdn.weatherapi.com/weather/64x64/night/113.png" },
-    { hourString: "00:00", temp: 24, conditionIcon: "//cdn.weatherapi.com/weather/64x64/night/113.png" },
-  ];
+  const weatherData = props.weatherData?.forecast;
+  const weekDaysArr = [];
+
+  const getDateString = (date) => {
+    if (!date) return null;
+    const [year, month, day] = date.split("-").map(Number);
+    return `${day}.${month}`;
+  };
+
+  const getWeekDay = (date) => {
+    if (!date) return null;
+    const currDate = new Date(date);
+    const dayOfWeekNumber = currDate.getDay();
+    return WEEKDAYS[dayOfWeekNumber];
+  };
+
+  weatherData?.forEach((dayWeather, index) => {
+    const weekDayObj = {};
+    weekDayObj.date = getDateString(dayWeather.date);
+    weekDayObj.weekDay = getWeekDay(dayWeather.date);
+    weekDayObj.temp = dayWeather.day.avgtemp_c;
+    weekDayObj.conditionIcon = dayWeather.day.condition.icon;
+    weekDaysArr.push(weekDayObj);
+
+    if (index == weatherData.length - 1) {
+      Array.from({ length: 7 - weatherData.length }).forEach((pseudoDay) => {
+        const weekDayObj = {};
+        weekDayObj.date = "--.--";
+        weekDayObj.weekDay = "-";
+        weekDayObj.temp = "--";
+        weekDayObj.conditionIcon = null;
+        weekDaysArr.push(weekDayObj);
+      });
+    }
+  });
+
   const selectWeekDay = (e) => {
     setWeekDay(e.currentTarget.getAttribute("value"));
     props.onWeekDayChoose(e.currentTarget.getAttribute("value"));
@@ -25,28 +53,46 @@ function WeekDays(props) {
 
         <div className="relative w-fit flex justify-between gap-1 xs:w-full xs:gap-1">
           {props.loadingStage != "complete" && <WeekDaysSkeleton className={props.loadingStage == "fading" ? "fade-out-loading" : ""}></WeekDaysSkeleton>}
-          {weekDaysArr.map((day, index) => {
-            return (
-              <div
-                onClick={selectWeekDay}
-                key={`weekDay_${index}`}
-                value={index}
-                className={`${
-                  index == weekDay ? "pressed" : ""
-                } cursor-pointer flex flex-col items-center rounded-md w-15 gap-3 lg:w-20 card-bg hover:bg-prm active:bg-scn dark:hover:bg-prm-dark dark:active:bg-scn-dark`}>
-                <div>
-                  <h3>{day.temp}°C</h3>
-                </div>
-                <div className="w-12 h-12 sm:h-14 lg:h-16 sm:w-auto">
-                  <img src={day.conditionIcon} alt="" />
-                </div>
 
-                <div>
-                  <h4>{day.hourString}</h4>
+          {weekDaysArr.length != 0 ? (
+            weekDaysArr.map((day, index) => {
+              return (
+                <div
+                  onClick={selectWeekDay}
+                  key={`weekDay_${index}`}
+                  value={index}
+                  className={`${index == weekDay ? "pressed" : ""} ${
+                    index > weatherData.length - 1 ? "disabled-weekday" : ""
+                  } cursor-pointer flex flex-col items-center rounded-md w-15 gap-3 lg:w-20 card-bg hover:bg-prm active:bg-scn dark:hover:bg-prm-dark dark:active:bg-scn-dark`}>
+                  <div>
+                    <h3>{day.temp}°C</h3>
+                  </div>
+                  <div className="w-12 h-12 sm:h-14 lg:h-16 sm:w-auto">
+                    <img className="w-full h-full" src={day.conditionIcon} alt="" />
+                  </div>
+
+                  <div className="flex flex-col justify-center items-center">
+                    <h4>{day.date}</h4>
+                    <h4>{day.weekDay}</h4>
+                  </div>
                 </div>
+              );
+            })
+          ) : (
+            <div className={`cursor-pointer flex flex-col items-center rounded-md w-15 gap-3 lg:w-20 card-bg hover:bg-prm active:bg-scn dark:hover:bg-prm-dark dark:active:bg-scn-dark`}>
+              <div>
+                <h3>--°C</h3>
               </div>
-            );
-          })}
+              <div className="w-12 h-12 sm:h-14 lg:h-16 sm:w-auto">
+                <img className="w-full h-full" src={null} alt="" />
+              </div>
+
+              <div className="flex flex-col justify-center items-center">
+                <h4>----</h4>
+                <h4>---</h4>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

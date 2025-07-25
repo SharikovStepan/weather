@@ -1,7 +1,7 @@
 function DayHighlightsSkeleton({className='',onAnimationEnd}) {
   return (
     <>
-      <div onAnimationEnd={onAnimationEnd} className={`fade-in absolute opacity-50 z-10 inset-0 h-full right-0 w-full grid grid-rows-6 xs:grid-rows-3 xs:grid-cols-2 lg:grid-rows-2 lg:grid-cols-3 gap-5 sm:gap-3 min-h-0 ${className}`}>
+      <div onAnimationEnd={onAnimationEnd} className={`fade-in absolute z-10 inset-0 h-full right-0 w-full grid grid-rows-6 xs:grid-rows-3 xs:grid-cols-2 lg:grid-rows-2 lg:grid-cols-3 gap-5 sm:gap-3 min-h-0 ${className}`}>
         <div className="relative card-bg highlight flex justify-around">
           <div className="grid grid-rows-[1fr_2fr_1fr] justify-items-center gap-2">
             <div className="highlight-tittle ">Восход</div>

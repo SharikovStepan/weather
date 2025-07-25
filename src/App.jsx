@@ -46,8 +46,6 @@ function App() {
     try {
       const startTime = Date.now();
       const [weatherData, conditions] = await Promise.all([fetchGet(URL_FORECAST), fetchGet(URL_CONDITIONS)]);
-      // console.log("conditions", conditions);
-      console.log("weatherData", weatherData);
 
       const { current, location, forecast } = weatherData;
       const { condition, is_day: isDay, temp_c, vis_km: visibility, wind_kph: windSpeed, uv, humidity } = current;

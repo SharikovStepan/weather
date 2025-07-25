@@ -4,10 +4,6 @@ import DayHighlightsSkeleton from "./DayHighlightsSkeleton";
 function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
   const dayForecast = weatherData.forecast?.[dayNum]["day"];
   const astro = weatherData.forecast?.[dayNum]["astro"];
-  console.log("dayForecast", dayForecast);
-  console.log("astro", astro);
-  console.log("weatherDataweatherDataweatherDataweatherDataweatherData", weatherData);
-
 
   const convertTo24 = (time12h) => {
     if (time12h) {
@@ -99,7 +95,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
             <img className="w-full h-full" src="src/assets/wind.png" alt="" />
           </div>
           <div className="text-3xl">
-            {dayNum == 1 ? "до " : ""}
+            {dayNum > 0 ? "до " : ""}
             <span className="highlight-value">{dayNum == 0 ? weatherData?.windSpeed : dayForecast?.maxwind_kph}</span> Км/ч
           </div>
         </div>
@@ -110,7 +106,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
             <img className="w-full h-full" src="src/assets/wet.png" alt="" />
           </div>
           <div className="text-3xl">
-            {dayNum == 1 ? "≈ " : ""}
+            {dayNum > 0 ? "≈ " : ""}
             <span className="highlight-value">{dayNum == 0 ? weatherData?.humidity : dayForecast?.avghumidity}</span> %
           </div>
         </div>
@@ -121,7 +117,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
             <img className="w-full h-full" src="src/assets/visibility.png" alt="" />
           </div>
           <div className="text-3xl">
-            {dayNum == 1 ? "≈ " : ""}
+            {dayNum > 0 ? "≈ " : ""}
             <span className="highlight-value">{dayNum == 0 ? weatherData?.visibility : dayForecast?.avgvis_km}</span> Км
           </div>
         </div>
