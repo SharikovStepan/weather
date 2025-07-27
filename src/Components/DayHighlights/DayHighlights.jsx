@@ -30,14 +30,14 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
           <div className="grid grid-rows-[1fr_2fr_1fr] justify-items-center gap-2">
             <div className="highlight-tittle">Восход</div>
             <div className="self-center highlight-img ">
-              <img className="w-full h-full" src="/src/assets/sunrise.png" alt="" />
+              <img className="w-full h-full" src="src/assets/sunrise.png" alt="" />
             </div>
             <div className="highlight-value">{convertTo24(astro?.sunrise)}</div>
           </div>
           <div className="grid grid-rows-[1fr_2fr_1fr] justify-items-center gap-2">
             <div className="highlight-tittle ">Закат</div>
             <div className="self-center highlight-img ">
-              <img className="w-full h-full" src="/src/assets/sunset.png" alt="" />
+              <img className="w-full h-full" src="src/assets/sunset.png" alt="" />
             </div>
             <div className="highlight-value">{convertTo24(astro?.sunset)}</div>
           </div>
@@ -47,7 +47,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
           <div className="highlight-tittle col-span-2">Температура</div>
 
           <div className="highlight-img row-start-2 self-end">
-            <img className="w-full h-full" src="/src/assets/thermometer-low.png" alt="" />
+            <img className="w-full h-full" src="src/assets/thermometer-low.png" alt="" />
           </div>
 
           <div className="highlight-tittle self-end">Мин.</div>
@@ -55,7 +55,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
             <span>{dayForecast ? parseInt(dayForecast?.mintemp_c) : "-"}</span>°C
           </div>
           <div className="relative highlight-img row-start-2 col-start-2 self-end">
-            <img className="w-full h-full" src="/src/assets/thermometer-high.png" alt="" />
+            <img className="w-full h-full" src="src/assets/thermometer-high.png" alt="" />
           </div>
 
           <div className="highlight-tittle row-start-3 col-start-2 self-end">Маск.</div>
