@@ -47,14 +47,15 @@
     @apply text-4xl sm:text-3xl;
   }
   .disabled-weekday {
-    @apply bg-prm-bg-dark pointer-events-none
+    @apply dark:bg-prm-bg-dark bg-prm-bg pointer-events-none;
   }
   .input-border {
     @apply outline-none pl-1 rounded-md focus:border-2 focus:border-scn-dark dark:focus:border-scn;
   }
-  /* .active-weekday{
-	@apply bg-pr
-  } */
+  .input-list-item {
+    @apply cursor-pointer pl-0.5 dark:hover:bg-prm-dark hover:bg-prm rounded-sm;
+  }
+
   html.theme-transition .card-bg {
     @apply transition-colors duration-300 ease-in-out;
   }

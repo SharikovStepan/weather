@@ -1,6 +1,7 @@
 import { useState } from "react";
 import WeekDaysSkeleton from "./WeekDaysSkeleton";
-import { WEEKDAYS } from "../../cons";
+
+import { getCurrentDateAndTime } from "../../utils";
 
 function WeekDays(props) {
   const [weekDay, setWeekDay] = useState(0);
@@ -8,24 +9,13 @@ function WeekDays(props) {
   const weatherData = props.weatherData?.forecast;
   const weekDaysArr = [];
 
-  const getDateString = (date) => {
-    if (!date) return null;
-    const [year, month, day] = date.split("-").map(Number);
-    return `${day}.${month}`;
-  };
-
-  const getWeekDay = (date) => {
-    if (!date) return null;
-    const currDate = new Date(date);
-    const dayOfWeekNumber = currDate.getDay();
-    return WEEKDAYS[dayOfWeekNumber];
-  };
-
   weatherData?.forEach((dayWeather, index) => {
     const weekDayObj = {};
-    weekDayObj.date = getDateString(dayWeather.date);
-    weekDayObj.weekDay = getWeekDay(dayWeather.date);
-    weekDayObj.temp = dayWeather.day.avgtemp_c;
+    const { weekday, date } = getCurrentDateAndTime(props.tzId, props.locationCode, "short", dayWeather.date);
+
+    weekDayObj.date = date;
+    weekDayObj.weekDay = weekday;
+    weekDayObj.temp = parseInt(dayWeather.day.avgtemp_c);
     weekDayObj.conditionIcon = dayWeather.day.condition.icon;
     weekDaysArr.push(weekDayObj);
 

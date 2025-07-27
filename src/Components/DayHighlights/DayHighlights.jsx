@@ -75,7 +75,11 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
           </div>
 
           <div className="relative w-full mb-4 bg-prm dark:bg-prm-dark rounded-xl">
-            <div className="absolute top-1/2 transform -translate-y-1/2 right-0 h-[110%] rounded-r-xl transition-all bg-prm dark:bg-prm-dark" style={{ width: `${uvStroke}%` }}></div>
+            <div
+              className={`${
+                uvStroke >= 98 && uvStroke <= 99 ? `rounded-l-lg` : uvStroke > 99 && uvStroke < 100 ? `rounded-l-md` : uvStroke == 100 ? "rounded-l-xl":''
+              } absolute top-1/2 transform -translate-y-1/2 right-0 h-[110%] rounded-r-xl transition-all bg-prm dark:bg-prm-dark`}
+              style={{ width: `${uvStroke}%` }}></div>
             <div className="absolute -top-6 font-bold opacity-50 w-full grid grid-cols-[1fr_1fr_1fr_0.30fr]">
               <span>0</span>
               <span>4</span>

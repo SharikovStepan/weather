@@ -1,17 +1,17 @@
-import { useState } from "react";
+
 import HorizontalScroll from "../HorizontalScroll";
 import HoursSkeleton from "./HoursSkeleton";
-import { getCurrentWeekdayAndTime } from "../../utils";
+import { getCurrentDateAndTime } from "../../utils";
 import HourSVG from "./HourSVG";
 
 function Hours({ loadingStage, weatherData, dayNum }) {
-  const conditions = weatherData?.allConditions;
+//   const conditions = weatherData?.allConditions;
   const dayHours = weatherData.forecast?.[dayNum]["hour"];
 
   const hoursArr = [];
-  //   const hoursArrs = [];
 
-  const { weekday, time } = weatherData ? getCurrentWeekdayAndTime(weatherData?.tzId, weatherData?.locationCode) : { weekDay: "", time: "" };
+
+  const { time } = weatherData ? getCurrentDateAndTime(weatherData?.tzId, weatherData?.locationCode) : { time: "" };
   const currentHour = dayNum == 0 ? parseInt(time.split(":")[0], 10) : 0;
 
   dayHours?.slice(currentHour).forEach((hour, index) => {
@@ -46,7 +46,7 @@ function Hours({ loadingStage, weatherData, dayNum }) {
               <div className="grid w-full" style={{ height: `${60}px` }}></div>
             ) : (
               <div className="grid ml-13" style={{ width: `calc(100*${hoursArr.length - 1}px)` }}>
-                {<HourSVG currentArr={hoursArr} start={currentHour}/>}
+                {<HourSVG currentArr={hoursArr} start={currentHour} />}
               </div>
             )}
             <div className="grid" style={{ gridTemplateColumns: `repeat(${hoursArr.length}, 100px)` }}>
