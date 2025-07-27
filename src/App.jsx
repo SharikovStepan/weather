@@ -7,7 +7,7 @@ import DarkModeSwitcher from "./Components/DarkModeSwitcher";
 import TabsButtons from "./Components/TabsButtons";
 import DayTab from "./Components/DayTab";
 import WeekTab from "./Components/WeekTab";
-import { COUNTRY_DICT_RU, CITY_DICT_RU, API_KEY, IP_KEY } from "./cons";
+import { COUNTRY_DICT_RU, CITY_DICT_RU} from "./cons";
 
 // const randowIndex = Math.floor(Math.random() * CITIES.length);
 

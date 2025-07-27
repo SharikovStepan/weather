@@ -1,11 +1,11 @@
-import sunrise from '@/assets/sunrise.png'
-import sunset from '@/assets/sunset.png'
-import thermometerHigh from '@/assets/thermometer-high.png'
-import thermometerLow from '@/assets/thermometer-low.png'
-import UVLogo from '@/assets/UV.png'
-import visibility from '@/assets/visibility.png'
-import wet from '@/assets/wet.png'
-import wind from '@/assets/wind.png'
+import sunrise from 'src/assets/sunrise.png'
+import sunset from 'src/assets/sunset.png'
+import thermometerHigh from 'src/assets/thermometer-high.png'
+import thermometerLow from 'src/assets/thermometer-low.png'
+import UVLogo from 'src/assets/UV.png'
+import visibility from 'src/assets/visibility.png'
+import wet from 'src/assets/wet.png'
+import wind from 'src/assets/wind.png'
 
 
 import DayHighlightsSkeleton from "./DayHighlightsSkeleton";
