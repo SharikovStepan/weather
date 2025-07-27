@@ -45,9 +45,9 @@ function App() {
           throw new Error(`Ошибка ipWeather: ${ipResponse.status}`);
         }
 
-        const ip = await ipResponse.json().ip;
-        //   console.log('ip');
-        const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/ipWeather?ip=${ip}`);
+        const ip = await ipResponse.json();
+		  
+        const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/ipWeather?ip=${ip.ip}`);
 
         if (!response.ok) {
           throw new Error(`Ошибка ipWeather: ${response.status}`);
@@ -62,7 +62,7 @@ function App() {
         setCurrentLocation(location);
       } catch (err) {
         console.error("Ошибка в getIpLocation:", err.message);
-        setCurrentLocation({ city: "Москва", country: "Russia" });
+        setCurrentLocation({ city: "Москва", country: "Россия" });
       }
     };
     getIpLocation();
