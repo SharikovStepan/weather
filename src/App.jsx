@@ -44,9 +44,10 @@ function App() {
         if (!ipResponse.ok) {
           throw new Error(`Ошибка ipWeather: ${ipResponse.status}`);
         }
-        const ip = ipResponse.json().ip;
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/ipWeather?ip${ip}`);
+        const ip = await ipResponse.json().ip;
+        //   console.log('ip');
+        const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/ipWeather?ip=${ip}`);
 
         if (!response.ok) {
           throw new Error(`Ошибка ipWeather: ${response.status}`);
