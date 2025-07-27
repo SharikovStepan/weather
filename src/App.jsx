@@ -7,7 +7,7 @@ import DarkModeSwitcher from "./Components/DarkModeSwitcher";
 import TabsButtons from "./Components/TabsButtons";
 import DayTab from "./Components/DayTab";
 import WeekTab from "./Components/WeekTab";
-import { COUNTRY_DICT_RU, CITY_DICT_RU} from "./cons";
+import { COUNTRY_DICT_RU, CITY_DICT_RU } from "./cons";
 
 // const randowIndex = Math.floor(Math.random() * CITIES.length);
 
@@ -39,7 +39,14 @@ function App() {
   useEffect(() => {
     const getIpLocation = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/ipWeather`);
+        const ipResponse = await fetch("https://api.ipify.org?format=json");
+
+        if (!ipResponse.ok) {
+          throw new Error(`Ошибка ipWeather: ${ipResponse.status}`);
+        }
+        const ip = ipResponse.json().ip;
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/ipWeather?ip${ip}`);
 
         if (!response.ok) {
           throw new Error(`Ошибка ipWeather: ${response.status}`);
@@ -66,7 +73,9 @@ function App() {
       try {
         const startTime = Date.now();
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/weather?city=${currentLocation.city}&country=${currentLocation.country}${currentLanguage ? `&lang=${currentLanguage}` : ""}`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL || ""}/api/weather?city=${currentLocation.city}&country=${currentLocation.country}${currentLanguage ? `&lang=${currentLanguage}` : ""}`
+        );
 
         if (!response.ok) {
           throw new Error(`Ошибка api/Weather: ${response.status}`);
