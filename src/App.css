@@ -3,6 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --color-asdasd: #b0022d;
   --color-prm-bg: #d6d6d6;
   --color-scn-bg: #bbb;
   --color-prm: #858585;
@@ -34,20 +35,27 @@
     @apply bg-scn-bg dark:bg-scn-bg-dark shadow-[0px_0px_15px] rounded-md shadow-scn-bg dark:shadow-scn-bg-dark;
   }
   .highlight {
-    @apply p-3 overflow-hidden sm:p-1
+    @apply p-3 overflow-hidden sm:p-1;
   }
   .highlight-img {
-	@apply h-20 w-20 sm:h-14 sm:w-14 md:h-14 md:w-14 lg:w-16 lg:h-16
- }
+    @apply h-20 w-20 sm:h-14 sm:w-14 md:h-14 md:w-14 lg:w-16 lg:h-16;
+  }
   .highlight-tittle {
-    @apply text-xl xs:text-xl sm:text-center sm:text-lg
+    @apply text-xl xs:text-xl sm:text-center sm:text-lg;
   }
   .highlight-value {
-    @apply text-4xl sm:text-3xl
+    @apply text-4xl sm:text-3xl;
   }
-  /* .active-weekday{
-	@apply bg-pr
-  } */
+  .disabled-weekday {
+    @apply dark:bg-prm-bg-dark bg-prm-bg pointer-events-none;
+  }
+  .input-border {
+    @apply outline-none pl-1 rounded-md focus:border-2 focus:border-scn-dark dark:focus:border-scn;
+  }
+  .input-list-item {
+    @apply cursor-pointer pl-0.5 dark:hover:bg-prm-dark hover:bg-prm rounded-sm;
+  }
+
   html.theme-transition .card-bg {
     @apply transition-colors duration-300 ease-in-out;
   }
