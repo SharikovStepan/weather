@@ -51,7 +51,7 @@ function Search({ language, onClick }) {
         <div
           className={`${
             cities.length > 0 ? "" : "hidden"
-          } absolute bottom-0 trasform translate-y-[calc(100%+10px)] left-0 w-full p-2 rounded-md z-10 shadow-[0px_0px_10px] bg-scn-bg shadow-scn dark:bg-scn-bg-dark dark:shadow-scn-dark`}>
+          } absolute bottom-0 trasform translate-y-[calc(100%+10px)] left-0 w-full p-2 rounded-md z-90 shadow-[0px_0px_10px] bg-scn-bg shadow-scn dark:bg-scn-bg-dark dark:shadow-scn-dark`}>
           {cities.length > 0 ? (
             <ul>
               {cities.map((city, index) => {
