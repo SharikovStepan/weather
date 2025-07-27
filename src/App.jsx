@@ -46,7 +46,7 @@ function App() {
         }
 
         const ip = await ipResponse.json();
-		  
+
         const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/ipWeather?ip=${ip.ip}`);
 
         if (!response.ok) {
@@ -65,7 +65,15 @@ function App() {
         setCurrentLocation({ city: "Москва", country: "Россия" });
       }
     };
-    getIpLocation();
+
+    const storageLocation = { city: localStorage.getItem("city"), country: localStorage.getItem("country") };
+    console.log("storageLocation", storageLocation);
+
+    if (storageLocation.city && storageLocation.country) {
+      setCurrentLocation({ city: storageLocation.city, country: storageLocation.country });
+    } else {
+      getIpLocation();
+    }
   }, []);
 
   useEffect(() => {
@@ -157,6 +165,9 @@ function App() {
 
   const getCity = (e) => {
     setLoadingStage("loading");
+    localStorage.setItem("city", e.target.getAttribute("city"));
+    localStorage.setItem("country", e.target.getAttribute("country"));
+
     setCurrentLocation({ city: e.target.getAttribute("city"), country: e.target.getAttribute("country") });
   };
 
