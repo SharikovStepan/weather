@@ -1,4 +1,13 @@
-import { useEffect, useState } from "react";
+import sunrise from '@/assets/sunrise.png'
+import sunset from '@/assets/sunset.png'
+import thermometerHigh from '@/assets/thermometer-high.png'
+import thermometerLow from '@/assets/thermometer-low.png'
+import UVLogo from '@/assets/UV.png'
+import visibility from '@/assets/visibility.png'
+import wet from '@/assets/wet.png'
+import wind from '@/assets/wind.png'
+
+
 import DayHighlightsSkeleton from "./DayHighlightsSkeleton";
 
 function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
@@ -30,14 +39,14 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
           <div className="grid grid-rows-[1fr_2fr_1fr] justify-items-center gap-2">
             <div className="highlight-tittle">Восход</div>
             <div className="self-center highlight-img ">
-              <img className="w-full h-full" src="src/assets/sunrise.png" alt="" />
+              <img className="w-full h-full" src={sunrise} alt="" />
             </div>
             <div className="highlight-value">{convertTo24(astro?.sunrise)}</div>
           </div>
           <div className="grid grid-rows-[1fr_2fr_1fr] justify-items-center gap-2">
             <div className="highlight-tittle ">Закат</div>
             <div className="self-center highlight-img ">
-              <img className="w-full h-full" src="src/assets/sunset.png" alt="" />
+              <img className="w-full h-full" src={sunset} alt="" />
             </div>
             <div className="highlight-value">{convertTo24(astro?.sunset)}</div>
           </div>
@@ -47,7 +56,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
           <div className="highlight-tittle col-span-2">Температура</div>
 
           <div className="highlight-img row-start-2 self-end">
-            <img className="w-full h-full" src="src/assets/thermometer-low.png" alt="" />
+            <img className="w-full h-full" src={thermometerLow} alt="" />
           </div>
 
           <div className="highlight-tittle self-end">Мин.</div>
@@ -55,7 +64,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
             <span>{dayForecast ? parseInt(dayForecast?.mintemp_c) : "-"}</span>°C
           </div>
           <div className="relative highlight-img row-start-2 col-start-2 self-end">
-            <img className="w-full h-full" src="src/assets/thermometer-high.png" alt="" />
+            <img className="w-full h-full" src={thermometerHigh} alt="" />
           </div>
 
           <div className="highlight-tittle row-start-3 col-start-2 self-end">Маск.</div>
@@ -69,7 +78,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
           <h3 className="highlight-tittle self-center">UV Индекс</h3>
           <div className="grid grid-cols-5 col-span-2">
             <div className="col-span-2 highlight-img">
-              <img className="w-full h-full" src="src/assets/uv.png" alt="" />
+              <img className="w-full h-full" src={UVLogo} alt="" />
             </div>
             <div className="highlight-value text-6xl sm:text-5xl self-center col-start-3 justify-self-center">{uvIndex}</div>
           </div>
@@ -96,7 +105,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
         <div className="card-bg highlight grid grid-rows-[1fr_2fr_2fr] sm:grid-rows-3 justify-items-center gap-5 sm:gap-1">
           <h3 className="highlight-tittle text-center">Скорость ветра</h3>
           <div className="highlight-img ">
-            <img className="w-full h-full" src="/src/assets/wind.png" alt="" />
+            <img className="w-full h-full" src={wind} alt="" />
           </div>
           <div className="text-3xl">
             {dayNum > 0 ? "до " : ""}
@@ -107,7 +116,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
         <div className="card-bg highlight grid grid-rows-[1fr_2fr_2fr] sm:grid-rows-3 justify-items-center gap-5 sm:gap-1">
           <h3 className="highlight-tittle text-center">Влажность</h3>
           <div className="highlight-img ">
-            <img className="w-full h-full" src="/src/assets/wet.png" alt="" />
+            <img className="w-full h-full" src={wet} alt="" />
           </div>
           <div className="text-3xl">
             {dayNum > 0 ? "≈ " : ""}
@@ -118,7 +127,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
         <div className="card-bg highlight grid grid-rows-[1fr_2fr_2fr] sm:grid-rows-3 justify-items-center gap-5 sm:gap-1">
           <h3 className="highlight-tittle text-center">Видимость</h3>
           <div className="highlight-img">
-            <img className="w-full h-full" src="/src/assets/visibility.png" alt="" />
+            <img className="w-full h-full" src={visibility} alt="" />
           </div>
           <div className="text-3xl">
             {dayNum > 0 ? "≈ " : ""}

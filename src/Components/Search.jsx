@@ -7,7 +7,7 @@ function Search({ language, onClick }) {
   useEffect(() => {
     const getCities = async () => {
       try {
-        const response = await fetch(`/api/search?searchString=${inputValue.toLowerCase()}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/search?searchString=${inputValue.toLowerCase()}`);
         if (!response.ok) throw new Error();
 
         const cities = await response.json();

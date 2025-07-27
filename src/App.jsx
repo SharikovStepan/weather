@@ -26,15 +26,6 @@ function App() {
 
   const [currentWeather, setCurrentWeather] = useState({});
 
-  const fetchGet = async (URL) => {
-    const response = await fetch(URL);
-    if (!response.ok) {
-      throw new Error(`Ошибка fetchGet: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  };
-
   const darkSwitch = () => {
     localStorage.setItem("darkMode", !isDark);
     setIsDark((prev) => !prev);
@@ -48,13 +39,12 @@ function App() {
   useEffect(() => {
     const getIpLocation = async () => {
       try {
-        const response = await fetch(`/api/ipWeather`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/ipWeather`);
 
         if (!response.ok) {
           throw new Error(`Ошибка ipWeather: ${response.status}`);
         }
         const locationData = await response.json();
-
 
         const location = {
           city: currentLanguage == "ru" && CITY_DICT_RU[locationData.city] ? CITY_DICT_RU[locationData.city] : locationData.city,
@@ -76,7 +66,7 @@ function App() {
       try {
         const startTime = Date.now();
 
-        const response = await fetch(`/api/weather?city=${currentLocation.city}&country=${currentLocation.country}${currentLanguage ? `&lang=${currentLanguage}` : ""}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/weather?city=${currentLocation.city}&country=${currentLocation.country}${currentLanguage ? `&lang=${currentLanguage}` : ""}`);
 
         if (!response.ok) {
           throw new Error(`Ошибка api/Weather: ${response.status}`);

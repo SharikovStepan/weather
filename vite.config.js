@@ -14,4 +14,9 @@ export default defineConfig({
     },
   },
   base: "/weather/",
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"), // Теперь @/ ведёт в папку src/
+    },
+  },
 });
