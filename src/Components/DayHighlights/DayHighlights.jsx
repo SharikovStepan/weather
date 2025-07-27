@@ -1,12 +1,11 @@
-import sunrise from 'src/assets/sunrise.png'
-import sunset from 'src/assets/sunset.png'
-import thermometerHigh from 'src/assets/thermometer-high.png'
-import thermometerLow from 'src/assets/thermometer-low.png'
-import UVLogo from 'src/assets/UV.png'
-import visibility from 'src/assets/visibility.png'
-import wet from 'src/assets/wet.png'
-import wind from 'src/assets/wind.png'
-
+import sunrise from "/src/assets/sunrise.png";
+import sunset from "/src/assets/sunset.png";
+import thermometerHigh from "/src/assets/thermometer-high.png";
+import thermometerLow from "/src/assets/thermometer-low.png";
+import UVLogo from "/src/assets/UV.png";
+import visibility from "/src/assets/visibility.png";
+import wet from "/src/assets/wet.png";
+import wind from "/src/assets/wind.png";
 
 import DayHighlightsSkeleton from "./DayHighlightsSkeleton";
 
@@ -86,7 +85,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
           <div className="relative w-full mb-4 bg-prm dark:bg-prm-dark rounded-xl">
             <div
               className={`${
-                uvStroke >= 98 && uvStroke <= 99 ? `rounded-l-lg` : uvStroke > 99 && uvStroke < 100 ? `rounded-l-md` : uvStroke == 100 ? "rounded-l-xl":''
+                uvStroke >= 98 && uvStroke <= 99 ? `rounded-l-lg` : uvStroke > 99 && uvStroke < 100 ? `rounded-l-md` : uvStroke == 100 ? "rounded-l-xl" : ""
               } absolute top-1/2 transform -translate-y-1/2 right-0 h-[110%] rounded-r-xl transition-all bg-prm dark:bg-prm-dark`}
               style={{ width: `${uvStroke}%` }}></div>
             <div className="absolute -top-6 font-bold opacity-50 w-full grid grid-cols-[1fr_1fr_1fr_0.30fr]">
