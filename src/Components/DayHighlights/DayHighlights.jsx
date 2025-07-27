@@ -96,7 +96,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
         <div className="card-bg highlight grid grid-rows-[1fr_2fr_2fr] sm:grid-rows-3 justify-items-center gap-5 sm:gap-1">
           <h3 className="highlight-tittle text-center">Скорость ветра</h3>
           <div className="highlight-img ">
-            <img className="w-full h-full" src="src/assets/wind.png" alt="" />
+            <img className="w-full h-full" src="/src/assets/wind.png" alt="" />
           </div>
           <div className="text-3xl">
             {dayNum > 0 ? "до " : ""}
@@ -107,7 +107,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
         <div className="card-bg highlight grid grid-rows-[1fr_2fr_2fr] sm:grid-rows-3 justify-items-center gap-5 sm:gap-1">
           <h3 className="highlight-tittle text-center">Влажность</h3>
           <div className="highlight-img ">
-            <img className="w-full h-full" src="src/assets/wet.png" alt="" />
+            <img className="w-full h-full" src="/src/assets/wet.png" alt="" />
           </div>
           <div className="text-3xl">
             {dayNum > 0 ? "≈ " : ""}
@@ -118,7 +118,7 @@ function DayHighlights({ loadingStage, onAnimationEnd, weatherData, dayNum }) {
         <div className="card-bg highlight grid grid-rows-[1fr_2fr_2fr] sm:grid-rows-3 justify-items-center gap-5 sm:gap-1">
           <h3 className="highlight-tittle text-center">Видимость</h3>
           <div className="highlight-img">
-            <img className="w-full h-full" src="src/assets/visibility.png" alt="" />
+            <img className="w-full h-full" src="/src/assets/visibility.png" alt="" />
           </div>
           <div className="text-3xl">
             {dayNum > 0 ? "≈ " : ""}
