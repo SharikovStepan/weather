@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { API_KEY } from "../cons";
 
 function Search({ language, onClick }) {
   const [inputValue, setInputValue] = useState("");
@@ -7,16 +6,13 @@ function Search({ language, onClick }) {
 
   useEffect(() => {
     const getCities = async () => {
-      const url = `http://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${inputValue.toLowerCase()}&lang=ru`;
       try {
-        const response = await fetch(url);
+        const response = await fetch(`/api/search?searchString=${inputValue.toLowerCase()}`);
         if (!response.ok) throw new Error();
 
         const cities = await response.json();
 
         setCities(cities);
-
-        console.log("cities", cities);
       } catch (error) {
         console.error(error);
       }

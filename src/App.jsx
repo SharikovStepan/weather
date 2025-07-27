@@ -48,26 +48,18 @@ function App() {
   useEffect(() => {
     const getIpLocation = async () => {
       try {
-        const ipResponse = await fetch(`https://api.ipinfo.io/lite/me?token=${IP_KEY}`);
+        const response = await fetch(`/api/ipWeather`);
 
-        if (!ipResponse.ok) {
-          throw new Error(`Ошибка ipResponse: ${ipResponse.status}`);
+        if (!response.ok) {
+          throw new Error(`Ошибка ipWeather: ${response.status}`);
         }
-        const ipData = await ipResponse.json();
+        const locationData = await response.json();
 
-        const locationResponse = await fetch(`https://api.weatherapi.com/v1/ip.json?key=${API_KEY}&q=${ipData.ip}`);
-
-        if (!locationResponse.ok) {
-          throw new Error(`Ошибка locationResponse: ${locationResponse.status}`);
-        }
-        const locationData = await locationResponse.json();
-        console.log("locationDatalocationData", locationData);
 
         const location = {
           city: currentLanguage == "ru" && CITY_DICT_RU[locationData.city] ? CITY_DICT_RU[locationData.city] : locationData.city,
           country: currentLanguage == "ru" && COUNTRY_DICT_RU[locationData.country_name] ? COUNTRY_DICT_RU[locationData.country_name] : locationData.country_name,
         };
-        console.log("location", location);
 
         setCurrentLocation(location);
       } catch (err) {
@@ -81,12 +73,17 @@ function App() {
   useEffect(() => {
     if (!currentLocation) return;
     const getWeather = async () => {
-      const URL_FORECAST = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${currentLocation.city},${currentLocation.country}&days=3&aqi=no&alerts=no${
-        currentLanguage ? `&lang=${currentLanguage}` : ""
-      }`;
       try {
         const startTime = Date.now();
-        const weatherData = await fetchGet(URL_FORECAST);
+
+        const response = await fetch(`/api/weather?city=${currentLocation.city}&country=${currentLocation.country}${currentLanguage ? `&lang=${currentLanguage}` : ""}`);
+
+        if (!response.ok) {
+          throw new Error(`Ошибка api/Weather: ${response.status}`);
+        }
+
+        const weatherData = await response.json();
+
         const { current, location, forecast } = weatherData;
         const { condition, temp_c, vis_km: visibility, wind_kph: windSpeed, uv, humidity } = current;
         const { country, name, tz_id: tzId } = location;
